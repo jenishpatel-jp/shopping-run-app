@@ -5,6 +5,9 @@ import { StatusBar } from 'expo-status-bar';
 import 'react-native-reanimated';
 
 import { useColorScheme } from '@/hooks/useColorScheme';
+import { ClerkProvider, ClerkLoaded } from '@clerk/clerk-expo';
+
+const PublishableKey = process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY;
 
 export default function RootLayout() {
   const colorScheme = useColorScheme();
