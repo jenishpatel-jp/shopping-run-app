@@ -7,7 +7,11 @@ import 'react-native-reanimated';
 import { useColorScheme } from '@/hooks/useColorScheme';
 import { ClerkProvider, ClerkLoaded } from '@clerk/clerk-expo';
 
-const PublishableKey = process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY;
+const PublishableKey = process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY!;
+
+if (!PublishableKey) {
+  throw new Error('Missing EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY');
+};
 
 export default function RootLayout() {
   const colorScheme = useColorScheme();
@@ -21,9 +25,16 @@ export default function RootLayout() {
   }
 
   return (
-    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <Slot />
-      <StatusBar style="auto" />
-    </ThemeProvider>
+    <ClerkProvider 
+      publishableKey={PublishableKey}
+      tokenCache={undefined}  
+    >
+      <ClerkLoaded>
+        <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
+          <Slot />
+          <StatusBar style="auto" />
+        </ThemeProvider>
+      </ClerkLoaded>
+    </ClerkProvider>
   );
 }
