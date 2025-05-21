@@ -23,3 +23,5 @@ const createTokenCache = (): TokenCache => {
         }
     }
 };
+
+export const tokenCache = Platform.OS !== 'web' ? createTokenCache() : undefined;
