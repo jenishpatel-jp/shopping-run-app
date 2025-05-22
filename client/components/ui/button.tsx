@@ -44,6 +44,30 @@ export const Button: React.FC<ButtonProps> = ({
             alignItems: "center",
             justifyContent: "center",
         };
+
+        switch (variant) {
+            case "filled":
+                return {
+                    ...baseStyle,
+                    backgroundColor: isDark ? "#1E1E1E" : "#F0F0F0",
+                    borderColor: isDark ? "#1E1E1E" : "#F0F0F0",
+                    borderWidth: 2,
+                };
+            case "outlined":
+                return {
+                    ...baseStyle,
+                    backgroundColor: "transparent",
+                    borderColor: isDark ? "#FFFFFF" : "#000000",
+                    borderWidth: 2,
+                };
+            case "ghost":
+                return {
+                    ...baseStyle,
+                    backgroundColor: "transparent",
+                };
+            default:
+                return baseStyle;
+        }
     };
 
 };
