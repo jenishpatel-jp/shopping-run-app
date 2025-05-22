@@ -4,6 +4,7 @@ import { View, Text} from "react-native";
 import { useRouter, Link } from "expo-router";
 import { useState } from "react";
 import Button from "@/components/ui/button";
+import TextInput from "@/components/ui/text-input";
 
 export default function SignInScreen() {
     const { signIn, setActive, isLoaded } = useSignIn();
@@ -17,6 +18,7 @@ export default function SignInScreen() {
         <View> 
             <ThemedText type="title" >Sign In</ThemedText>
             <Link href={"/sign-up"} style={{color : "white"}}>Go to Sign Up</Link>
+            <TextInput  label="Hello" />
             <Button>Hello</Button>
         </View>
     )
