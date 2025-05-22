@@ -1,6 +1,7 @@
 import { appleBlue, zincColors } from "@/constants/Colors";
 import React, { use } from "react";
-import { ViewStyle, TextStyle, useColorScheme } from "react-native";
+import { ViewStyle, TextStyle, useColorScheme, Pressable, ActivityIndicator, StyleSheet } from "react-native";
+import { ThemedText } from "../ThemedText";
 
 type ButtonVariant = "filled" | "outline" | "ghost";
 type ButtonSize = "sm" | "md" | "lg";
@@ -38,8 +39,8 @@ export const Button: React.FC<ButtonProps> = ({
         lg: { height: 55, fontsize: 18, padding: 20 },
     };
 
-    const getVariantStyles = () => {
-        const baseStyle = {
+    const getVariantStyle = () => {
+        const baseStyle: ViewStyle = {
             borderRadius: 12,
             flexDirection: "row",
             alignItems: "center",
@@ -81,6 +82,39 @@ export const Button: React.FC<ButtonProps> = ({
         }
     };
 
-    
+    return (
+        <Pressable 
+            onPress={onPress}
+            disabled={disabled || loading}
+            style= {[
+                getVariantStyle(),
+                {
+                    height: sizeStyles[size].height,
+                    padding: sizeStyles[size].padding,
+                    opacity: disabled ? 0.5 : 1,
+                },
+                style
+            ]}
+        >
+            {loading ? (<ActivityIndicator color={getTextColor()} />
+            ): (
+                <ThemedText
+                    style={StyleSheet.flatten([
+                        {
+                            fontSzie: sizeStyles[size].fontsize,
+                            color: getTextColor(),
+                            textAlign: "center",
+                            marginBottom: 0,
+                            fontWeight: "700",
+                        },
+                        textStyle
+                    ])}
+                    >
+                        {children}
+                </ThemedText>
+            )}
+        </Pressable>
+    );
+};
 
-}
+export default Button;
