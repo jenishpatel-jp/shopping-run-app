@@ -1,4 +1,4 @@
-import { zincColors } from "@/constants/Colors";
+import { appleBlue, zincColors } from "@/constants/Colors";
 import React, { use } from "react";
 import { ViewStyle, TextStyle, useColorScheme } from "react-native";
 
@@ -67,6 +67,20 @@ export const Button: React.FC<ButtonProps> = ({
         }
     };
 
+    const getTextColor = () => {
+        if (disabled) {
+            return isDark ? zincColors[500] : zincColors[400];
+        }
+
+        switch (variant) {
+            case "filled":
+                return isDark ? zincColors[900] : zincColors[50];
+            case "outline":
+            case "ghost":
+                return appleBlue;
+        }
+    };
+
     
 
-};
+}
