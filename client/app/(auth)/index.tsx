@@ -1,8 +1,9 @@
 import { ThemedText } from "@/components/ThemedText";
 import { useSignIn } from "@clerk/clerk-expo";
-import { View, Text, Button} from "react-native";
+import { View, Text} from "react-native";
 import { useRouter, Link } from "expo-router";
 import { useState } from "react";
+import Button from "@/components/ui/button";
 
 export default function SignInScreen() {
     const { signIn, setActive, isLoaded } = useSignIn();
@@ -16,6 +17,7 @@ export default function SignInScreen() {
         <View> 
             <ThemedText type="title" >Sign In</ThemedText>
             <Link href={"/sign-up"} style={{color : "white"}}>Go to Sign Up</Link>
+            <Button>Hello</Button>
         </View>
     )
 }
