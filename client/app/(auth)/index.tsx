@@ -15,7 +15,7 @@ export default function SignInScreen() {
     return(
         <View> 
             <ThemedText type="title" >Sign In</ThemedText>
-            <Link href={"/sign-up"}></Link>
+            <Link href={"/sign-up"} style={{color : "white"}}>Go to Sign Up</Link>
         </View>
     )
 }
