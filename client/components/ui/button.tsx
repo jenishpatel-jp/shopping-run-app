@@ -1,7 +1,8 @@
+import { zincColors } from "@/constants/Colors";
 import React, { use } from "react";
 import { ViewStyle, TextStyle, useColorScheme } from "react-native";
 
-type ButtonVariant = "filled" | "outlined" | "ghost";
+type ButtonVariant = "filled" | "outline" | "ghost";
 type ButtonSize = "sm" | "md" | "lg";
 
 interface ButtonProps {
@@ -49,25 +50,23 @@ export const Button: React.FC<ButtonProps> = ({
             case "filled":
                 return {
                     ...baseStyle,
-                    backgroundColor: isDark ? "#1E1E1E" : "#F0F0F0",
-                    borderColor: isDark ? "#1E1E1E" : "#F0F0F0",
-                    borderWidth: 2,
+                    backgroundColor: isDark ? zincColors[50] : zincColors[900],
                 };
-            case "outlined":
+            case "outline":
                 return {
                     ...baseStyle,
                     backgroundColor: "transparent",
-                    borderColor: isDark ? "#FFFFFF" : "#000000",
-                    borderWidth: 2,
+                    borderWidth: 1,
+                    borderColor: isDark ? zincColors[700] : zincColors[300],
                 };
             case "ghost":
                 return {
                     ...baseStyle,
                     backgroundColor: "transparent",
                 };
-            default:
-                return baseStyle;
         }
     };
+
+    
 
 };
