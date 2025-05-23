@@ -7,6 +7,7 @@ import { useRouter } from "expo-router";
 import { useState } from "react";
 import { View, Text, StyleSheet, Platform } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { ClerkAPIError } from "@clerk/types";
 
 export default function SignUpScreen() {
     
@@ -15,7 +16,8 @@ export default function SignUpScreen() {
 
     const [emailAddress, setEmailAddress] = useState<string>("");
     const [password, setPassword] = useState<string>("");
-    const [isSignedIn, setIsSignedIn] = useState<boolean>(false);
+    const [isLoading, setIsLoading] = useState<boolean>(false);
+    const [errors, setErrors] = useState<ClerkAPIError[]>([]);
 
     const onSignUpPress = () => {
 
@@ -30,7 +32,7 @@ export default function SignUpScreen() {
                     label="Email" 
                     placeholder="Enter email" 
                     keyboardType="email-address"
-                    onChangeText={setEmailAddress}
+                    onChangeText={(email) => setEmailAddress(email)}
                     autoCapitalize="none"
                     />
                 <TextInput 
@@ -44,23 +46,16 @@ export default function SignUpScreen() {
                 />
                 <Button
                     onPress={onSignUpPress}
-                    loading={isSignedIn}
-                    disabled={!emailAddress || !password || isSignedIn}>
-                        Sign In
+                    loading={isLoading}
+                    disabled={!emailAddress || !password || isLoading}>
+                        Continue
                 </Button>
 
-                <View style={styles.dontHaveAccount}>
-                    <ThemedText> Don't have an account? </ThemedText>
-                    <Button onPress={()=> router.push("/sign-up")} variant="ghost" > Sign Up</Button>
-                
-                </View>
-
-                <View style={styles.dontHaveAccount}>
-                    <ThemedText> Forgot Password? </ThemedText>
-                    <Button onPress={()=> router.push("/reset-password")} variant="ghost" > Reset Password</Button>
-                
-                </View>
-
+                {errors.map((error) => (
+                    <ThemedText key={error.longMessage} style={styles.errorText} >
+                        {error.longMessage}
+                    </ThemedText>
+                ))}
             </BodyScrollView>
         </SafeAreaView>
     )
@@ -75,4 +70,7 @@ const styles = StyleSheet.create({
         marginTop: 16,
         alignItems: "center",
     },
+    errorText: {
+        color: "red",
+    }
 })
