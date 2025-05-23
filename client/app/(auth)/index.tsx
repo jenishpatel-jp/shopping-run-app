@@ -1,6 +1,6 @@
 import { ThemedText } from "@/components/ThemedText";
 import { useSignIn } from "@clerk/clerk-expo";
-import { View, Text, StyleSheet} from "react-native";
+import { View, Text, StyleSheet, Platform} from "react-native";
 import { useRouter, Link } from "expo-router";
 import { useState } from "react";
 import Button from "@/components/ui/button";
@@ -70,6 +70,7 @@ export default function SignInScreen() {
 const styles = StyleSheet.create({
     contentContainer: {                    
         padding: 16,
+        paddingTop: Platform.OS === "android" ? 60 : 16,
     },
     dontHaveAccount: {
         marginTop: 16,
