@@ -5,7 +5,7 @@ import { useRouter, Link } from "expo-router";
 import { useState } from "react";
 import Button from "@/components/ui/button";
 import TextInput from "@/components/ui/text-input";
-import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
+import { SafeAreaView } from "react-native-safe-area-context";
 import { BodyScrollView } from "@/components/ui/BodyScrollView";
 
 export default function SignInScreen() {
@@ -21,7 +21,6 @@ export default function SignInScreen() {
     }
 
     return(
-        
         <SafeAreaView>
             <BodyScrollView
                 style={styles.contentContainer}
