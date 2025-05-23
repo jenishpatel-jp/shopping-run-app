@@ -5,6 +5,7 @@ import { useRouter, Link } from "expo-router";
 import { useState } from "react";
 import Button from "@/components/ui/button";
 import TextInput from "@/components/ui/text-input";
+import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 
 export default function SignInScreen() {
     const { signIn, setActive, isLoaded } = useSignIn();
@@ -15,11 +16,13 @@ export default function SignInScreen() {
     const [isSignedIn, setIsSignedIn] = useState<boolean>(false);
 
     return(
-        <View> 
-            <ThemedText type="title" >Sign In</ThemedText>
-            <Link href={"/sign-up"} style={{color : "white"}}>Go to Sign Up</Link>
-            <TextInput  label="Hello" />
-            <Button>Hello</Button>
-        </View>
+        <SafeAreaProvider >
+            <SafeAreaView> 
+                <ThemedText type="title" >Sign In</ThemedText>
+                <Link href={"/sign-up"} style={{color : "white"}}>Go to Sign Up</Link>
+                <TextInput  label="Hello" />
+                <Button>Hello</Button>
+            </SafeAreaView>
+        </SafeAreaProvider>
     )
 }

@@ -10,7 +10,15 @@ export default function AuthRoutesLayout() {
         <Stack 
             screenOptions={{
                 ...(process.env.EXPO_OS !== "ios"
-                    ? {} 
+                    ? {
+                        headerShown: false,
+                        headerLargeTitle: true,
+                        headerTransparent: true,
+                        headerBlurEffect: "systemChromeMaterial",
+                        headerLargeTitleShadowVisible: false,
+                        headerShadowVisible: true,
+                        
+                    } 
                     : {
                         headerLargeTitle: true,
                         headerTransparent: true,
