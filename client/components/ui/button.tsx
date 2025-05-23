@@ -35,8 +35,8 @@ export const Button: React.FC<ButtonProps> = ({
         { height: number; fontsize: number, padding: number }
     > = {
         sm: { height: 36, fontsize: 14, padding: 12 },
-        md: { height: 44, fontsize: 16, padding: 16 },
-        lg: { height: 55, fontsize: 18, padding: 20 },
+        md: { height: 50, fontsize: 16, padding: 16 },
+        lg: { height: 60, fontsize: 18, padding: 20 },
     };
 
     const getVariantStyle = () => {
