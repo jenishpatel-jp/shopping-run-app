@@ -1,10 +1,78 @@
 import { ThemedText } from "@/components/ThemedText";
-import { View, Text } from "react-native";
+import { BodyScrollView } from "@/components/ui/BodyScrollView";
+import Button from "@/components/ui/button";
+import TextInput from "@/components/ui/text-input";
+import { useSignIn } from "@clerk/clerk-expo";
+import { useRouter } from "expo-router";
+import { useState } from "react";
+import { View, Text, StyleSheet, Platform } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function SignUpScreen() {
+    
+    const { signIn, setActive, isLoaded } = useSignIn();
+    const router = useRouter();
+
+    const [emailAddress, setEmailAddress] = useState<string>("");
+    const [password, setPassword] = useState<string>("");
+    const [isSignedIn, setIsSignedIn] = useState<boolean>(false);
+
+    const onSignUpPress = () => {
+
+    }
+
     return(
-        <View> 
-            <ThemedText type="title" >Sign Up Screen</ThemedText>
-        </View>
+        <SafeAreaView>
+            <BodyScrollView
+                style={styles.contentContainer}
+            >
+                <TextInput  
+                    label="Email" 
+                    placeholder="Enter email" 
+                    keyboardType="email-address"
+                    onChangeText={setEmailAddress}
+                    autoCapitalize="none"
+                    />
+                <TextInput 
+                    label="Password" 
+                    value={password}
+                    placeholder="Enter password"
+                    autoCapitalize="none"
+                    secureTextEntry={true}
+                    onChangeText={(password) => setPassword(password)}
+
+                />
+                <Button
+                    onPress={onSignUpPress}
+                    loading={isSignedIn}
+                    disabled={!emailAddress || !password || isSignedIn}>
+                        Sign In
+                </Button>
+
+                <View style={styles.dontHaveAccount}>
+                    <ThemedText> Don't have an account? </ThemedText>
+                    <Button onPress={()=> router.push("/sign-up")} variant="ghost" > Sign Up</Button>
+                
+                </View>
+
+                <View style={styles.dontHaveAccount}>
+                    <ThemedText> Forgot Password? </ThemedText>
+                    <Button onPress={()=> router.push("/reset-password")} variant="ghost" > Reset Password</Button>
+                
+                </View>
+
+            </BodyScrollView>
+        </SafeAreaView>
     )
 }
+
+const styles = StyleSheet.create({
+    contentContainer: {                    
+        padding: 16,
+        paddingTop: Platform.OS === "android" ? 60 : 16,
+    },
+    dontHaveAccount: {
+        marginTop: 16,
+        alignItems: "center",
+    },
+})
