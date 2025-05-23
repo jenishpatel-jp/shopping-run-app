@@ -11,7 +11,7 @@ export default function AuthRoutesLayout() {
             screenOptions={{
                 ...(process.env.EXPO_OS !== "ios"
                     ? {
-                        headerShown: false,
+                        headerShown: true,
                         headerLargeTitle: true,
                         headerTransparent: true,
                         headerBlurEffect: "systemChromeMaterial",

@@ -6,6 +6,7 @@ import { useState } from "react";
 import Button from "@/components/ui/button";
 import TextInput from "@/components/ui/text-input";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
+import { BodyScrollView } from "@/components/ui/BodyScrollView";
 
 export default function SignInScreen() {
     const { signIn, setActive, isLoaded } = useSignIn();
@@ -16,13 +17,20 @@ export default function SignInScreen() {
     const [isSignedIn, setIsSignedIn] = useState<boolean>(false);
 
     return(
-        <SafeAreaProvider >
-            <SafeAreaView> 
-                <ThemedText type="title" >Sign In</ThemedText>
-                <Link href={"/sign-up"} style={{color : "white"}}>Go to Sign Up</Link>
-                <TextInput  label="Hello" />
+        
+        <SafeAreaView>
+            <BodyScrollView
+            >
+                <TextInput  
+                    label="Email" 
+                    placeholder="Enter email" 
+                    keyboardType="email-address"
+                    onChangeText={setEmailAddress}
+                    autoCapitalize="none"
+                    />
                 <Button>Hello</Button>
-            </SafeAreaView>
-        </SafeAreaProvider>
+            </BodyScrollView>
+        </SafeAreaView>
+
     )
 }
