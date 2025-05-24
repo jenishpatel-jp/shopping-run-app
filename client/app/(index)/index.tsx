@@ -1,10 +1,25 @@
 import { ThemedText } from "@/components/ThemedText";
-import { View, Text } from "react-native";
+import { BodyScrollView } from "@/components/ui/BodyScrollView";
+import Button from "@/components/ui/button";
+import { useClerk } from "@clerk/clerk-expo";
+import { View, Text, Platform, StyleSheet } from "react-native";
 
 export default function HomeScreen() {
+
+    const { signOut } = useClerk()
+
     return(
-        <View> 
+        <BodyScrollView style={styles.contentContainer}> 
             <ThemedText type="title" >Home</ThemedText>
-        </View>
+            <Button onPress={signOut} >Sign Out p</Button>
+        </BodyScrollView>
     )
 }
+
+const styles = StyleSheet.create({
+    contentContainer: {                    
+        padding: 16,
+        paddingTop: Platform.OS === "android" ? 20 : 16,
+    },
+
+})
