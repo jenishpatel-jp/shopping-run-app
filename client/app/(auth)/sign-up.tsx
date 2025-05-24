@@ -40,12 +40,33 @@ export default function SignUpScreen() {
             setPendingVerification(true);
         }catch (error) {
             console.log("Error signing up", error);
+        } finally {
+            setIsLoading(false);
         }
     };
 
-    const onVerifyPress = () => {
+    const onVerifyPress = async () => {
+        if (!isLoaded) return;
+        setIsLoading
+        setErrors([]);
 
-    }
+        try {
+            const signUpAttempt = await signUp.attemptEmailAddressVerification({
+                code
+            });
+
+            if (signUpAttempt.status === "complete"){
+                await setActive({ session: signUpAttempt.createdSessionId })
+                router.replace("/")
+            } else {
+                console.log(signUpAttempt);
+            }
+        }catch (error) {
+            console.log("Error signing up", error);
+        } finally {
+            setIsLoading(false);
+        }
+    };
 
     if (pendingVerification) {
         return (
