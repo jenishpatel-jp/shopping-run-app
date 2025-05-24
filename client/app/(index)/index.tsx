@@ -24,7 +24,7 @@ export default function HomeScreen() {
 
     const renderHeaderLeft = () => {
         return (
-            <Pressable>
+            <Pressable onPress={() => router.push("/profile")} >
                 <IconSymbol name="gear" size={32} color="white" />
             </Pressable>
         )
