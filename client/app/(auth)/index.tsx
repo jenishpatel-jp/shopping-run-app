@@ -1,12 +1,13 @@
 import { ThemedText } from "@/components/ThemedText";
-import { useSignIn } from "@clerk/clerk-expo";
+import { isClerkAPIResponseError, useSignIn } from "@clerk/clerk-expo";
 import { View, Text, StyleSheet, Platform} from "react-native";
 import { useRouter, Link } from "expo-router";
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import Button from "@/components/ui/button";
 import TextInput from "@/components/ui/text-input";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { BodyScrollView } from "@/components/ui/BodyScrollView";
+import { ClerkAPIError } from "@clerk/types";
 
 export default function SignInScreen() {
     const { signIn, setActive, isLoaded } = useSignIn();
@@ -15,10 +16,42 @@ export default function SignInScreen() {
     const [emailAddress, setEmailAddress] = useState<string>("");
     const [password, setPassword] = useState<string>("");
     const [isSignedIn, setIsSignedIn] = useState<boolean>(false);
+    const [errors, setErrors] = useState<ClerkAPIError[]>([]);
 
-    const onSignInPress = () => {
 
+    const onSignInPress = useCallback(async () => {
+    if (!isLoaded) return;
+
+
+    setIsSignedIn(true);
+    setErrors([]);
+
+    // Start the sign-in process using the email and password provided
+    try {
+      const signInAttempt = await signIn.create({
+        identifier: emailAddress,
+        password,
+      });
+
+      // If sign-in process is complete, set the created session as active
+      // and redirect the user
+      if (signInAttempt.status === "complete") {
+        await setActive({ session: signInAttempt.createdSessionId });
+        router.replace("/(index)");
+      } else {
+        // If the status isn't complete, check why. User might need to
+        // complete further steps.
+        console.error(JSON.stringify(signInAttempt, null, 2));
+      }
+    } catch (err) {
+      // See https://clerk.com/docs/custom-flows/error-handling
+      // for more info on error handling
+      if (isClerkAPIResponseError(err)) setErrors(err.errors);
+      console.error(JSON.stringify(err, null, 2));
+    } finally {
+      setIsSignedIn(false);
     }
+  }, [isLoaded, signIn, emailAddress, password, setActive]);
 
     return(
         <SafeAreaView>
