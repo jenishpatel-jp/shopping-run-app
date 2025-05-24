@@ -2,7 +2,7 @@ import { ThemedText } from "@/components/ThemedText";
 import { BodyScrollView } from "@/components/ui/BodyScrollView";
 import Button from "@/components/ui/button";
 import TextInput from "@/components/ui/text-input";
-import { useSignIn } from "@clerk/clerk-expo";
+import { useSignUp } from "@clerk/clerk-expo";
 import { useRouter } from "expo-router";
 import { useState } from "react";
 import { View, Text, StyleSheet, Platform } from "react-native";
@@ -11,7 +11,7 @@ import { ClerkAPIError } from "@clerk/types";
 
 export default function SignUpScreen() {
     
-    const { signIn, setActive, isLoaded } = useSignIn();
+    const { signUp, setActive, isLoaded } = useSignUp   ();
     const router = useRouter();
 
     const [emailAddress, setEmailAddress] = useState<string>("");
@@ -22,9 +22,27 @@ export default function SignUpScreen() {
     const [code, setCode] = useState<string>("");
     const [pendingVerification, setPendingVerification] = useState<boolean>(false);
 
-    const onSignUpPress = () => {
+    const onSignUpPress = async () => {
+        if (!isLoaded) return;
+        setIsLoading
+        setErrors([]);
+        
+        try {
+            // start auth flow
+            await signUp.create({
+                emailAddress,
+                password,
+            })
+            // confirmation
+            await signUp.prepareEmailAddressVerification({ 
+                strategy: "email_code" 
+            });
+            setPendingVerification(true);
+        }catch (error) {
+            console.log("Error signing up", error);
+        }
+    };
 
-    }
     const onVerifyPress = () => {
 
     }
