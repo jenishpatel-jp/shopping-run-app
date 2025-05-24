@@ -1,4 +1,3 @@
-import * as React from "react";
 import { useRouter } from "expo-router";
 import { ThemedText } from "@/components/ThemedText";
 import { BodyScrollView } from "@/components/ui/BodyScrollView";
@@ -8,18 +7,19 @@ import { isClerkAPIResponseError, useSignIn } from "@clerk/clerk-expo";
 import { ClerkAPIError } from "@clerk/types";
 import { StyleSheet, Platform } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { useState, useCallback } from "react";
 
 export default function ResetPassword() {
   const { isLoaded, signIn, setActive } = useSignIn();
   const router = useRouter();
 
-  const [emailAddress, setEmailAddress] = React.useState("");
-  const [password, setPassword] = React.useState("");
-  const [pendingVerification, setPendingVerification] = React.useState(false);
-  const [code, setCode] = React.useState("");
-  const [errors, setErrors] = React.useState<ClerkAPIError[]>([]);
+  const [emailAddress, setEmailAddress] = useState("");
+  const [password, setPassword] = useState("");
+  const [pendingVerification, setPendingVerification] = useState(false);
+  const [code, setCode] = useState("");
+  const [errors, setErrors] = useState<ClerkAPIError[]>([]);
 
-  const onResetPasswordPress = React.useCallback(async () => {
+  const onResetPasswordPress = useCallback(async () => {
     if (!isLoaded) return;
     setErrors([]);
 
@@ -36,7 +36,7 @@ export default function ResetPassword() {
     }
   }, [isLoaded, emailAddress, signIn]);
 
-  const onVerifyPress = React.useCallback(async () => {
+  const onVerifyPress = useCallback(async () => {
     if (!isLoaded) return;
 
     try {
