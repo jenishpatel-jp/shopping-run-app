@@ -16,7 +16,7 @@ export default function HomeScreen() {
 
     const renderHeaderRight = () => {
         return (
-            <Pressable>
+            <Pressable onPress ={() => router.push("/(index)/list/new")} >
                 <IconSymbol name="plus" size={32} color="white" />
             </Pressable>
         )
@@ -34,7 +34,8 @@ export default function HomeScreen() {
         <>
         <Stack.Screen options={{ 
             headerRight: renderHeaderRight,
-            headerLeft: renderHeaderLeft
+            headerLeft: renderHeaderLeft,
+        
          }}>
 
         </Stack.Screen>
