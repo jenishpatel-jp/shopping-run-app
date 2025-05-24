@@ -17,10 +17,42 @@ export default function SignUpScreen() {
     const [emailAddress, setEmailAddress] = useState<string>("");
     const [password, setPassword] = useState<string>("");
     const [isLoading, setIsLoading] = useState<boolean>(false);
+
     const [errors, setErrors] = useState<ClerkAPIError[]>([]);
+    const [code, setCode] = useState<string>("");
+    const [pendingVerification, setPendingVerification] = useState<boolean>(false);
 
     const onSignUpPress = () => {
 
+    }
+    const onVerifyPress = () => {
+
+    }
+
+    if (pendingVerification) {
+        return (
+            <BodyScrollView contentContainerStyle={styles.contentContainer}>
+                <TextInput 
+                    value={code}
+                    label={`Enter the verification code we sent to ${emailAddress}`}
+                    placeholder="Enter verification code"
+                    onChangeText={(code) => setCode(code)}
+                >
+                </TextInput>
+                <Button
+                    onPress={onVerifyPress}
+                    disabled={!code || isLoading}
+                    loading={isLoading} 
+                >
+                    Verify   
+                </Button>
+                {errors.map((error) => (
+                    <ThemedText key={error.longMessage} style={styles.errorText} >
+                        {error.longMessage}
+                    </ThemedText>
+                ))}
+            </BodyScrollView>
+        )
     }
 
     return(
