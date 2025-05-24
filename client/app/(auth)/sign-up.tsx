@@ -57,7 +57,7 @@ export default function SignUpScreen() {
 
             if (signUpAttempt.status === "complete"){
                 await setActive({ session: signUpAttempt.createdSessionId })
-                router.replace("/")
+                router.replace("/(index)");
             } else {
                 console.log(signUpAttempt);
             }
