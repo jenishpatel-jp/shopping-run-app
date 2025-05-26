@@ -27,6 +27,17 @@ export default function HomeRoutesLayout() {
                     headerShown: false,
                 }}
             /> 
+            <Stack.Screen name = "profile"
+                options ={{
+                    presentation: "formSheet",
+                    sheetAllowedDetents: [0.7, 1], //0.7 is the height of the sheet when it is expanded, 1 is the full screen when the user drags it up
+                    sheetGrabberVisible: true,
+                    headerShown: false,
+                }}
+            
+            
+            />
+
         </Stack>
     )
 }
