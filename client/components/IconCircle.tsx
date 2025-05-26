@@ -8,10 +8,28 @@ interface IconCircleProps {
     style?: ViewStyle
 }
 
-export default function IconCircle( { emoji, backgroundColor, size, style }: IconCircleProps ) {
+export default function IconCircle( { 
+    emoji, 
+    backgroundColor = "lightblue", 
+    size = 48, 
+    style, 
+}: IconCircleProps ) {
     return (
-        <View>
+        <View 
+            style={[
+                {
+                    backgroundColor,
+                    width: size,
+                    height: size,
+                    borderRadius: 12, 
+                    alignItems: "center",
+                    justifyContent: "center",
+                },
+                style
+            ]}
+        
+        >
             <ThemedText style={{fontSize: 22}}> {emoji} </ThemedText>
         </View>
-    )
+    );
 }
