@@ -20,6 +20,13 @@ export default function HomeRoutesLayout() {
                 }}
         >
             <Stack.Screen name="index" options={{ headerTitle: "Shopping List" }} />
+            <Stack.Screen name="list/new/index" 
+                options = {{
+                    presentation: "formSheet",
+                    sheetGrabberVisible: true,
+                    headerShown: false,
+                }}
+            /> 
         </Stack>
     )
 }
