@@ -1,6 +1,15 @@
-import { Stack } from "expo-router";
+import Button from "@/components/ui/button";
+import { useUser } from "@clerk/clerk-expo";
+import { Redirect, Stack, useRouter } from "expo-router";
 
 export default function HomeRoutesLayout() {
+    const router = useRouter();
+    const { user } = useUser();
+
+    if (!user) {
+        return <Redirect href={"/(auth)"} />
+    }
+
     return (
         <Stack 
             screenOptions={{
@@ -34,7 +43,18 @@ export default function HomeRoutesLayout() {
                     sheetGrabberVisible: true,
                     headerShown: false,
                 }}
-            
+            />
+            <Stack.Screen name="list/new/scan"
+                options={{
+                    presentation: "fullScreenModal",
+                    headerLargeTitle: false,
+                    headerTitle: "Scan QR Code",
+                    headerLeft: () => (
+                        <Button variant="ghost" onPress={() => router.back()} >
+                            Cancel
+                        </Button>
+                    )
+                }}
             
             />
 
