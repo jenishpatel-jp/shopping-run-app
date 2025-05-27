@@ -4,14 +4,35 @@ import { SafeAreaProvider } from "react-native-safe-area-context";
 import { StyleSheet, Platform, View } from "react-native";
 import IconCircle from "@/components/IconCircle";
 import { backgroundColors, emojies } from "@/constants/Colors";
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import Button from "@/components/ui/button";
+import TextInput from "@/components/ui/text-input";
+
+const isValidUUID = (id: string | null) => {
+    if (!id) return false;
+    const uuidRegex = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
+    return uuidRegex.test(id);
+};
+
 
 export default function NewListScreen() {
 
     const randomEmoji = useMemo(() => emojies[Math.floor(Math.random() * emojies.length)], []);
 
     const randomColour = useMemo(() => backgroundColors[Math.floor(Math.random() * backgroundColors.length)], []);
+
+    const [listId, setListId] = useState("");
+    const isValidListId = useMemo(() => isValidUUID(listId), [listId]);
+
+    const joinShoppingListCallback = (listId:string) => {
+
+    };
+
+    const handleJoinList = () => {
+
+    };
+
+
     
     return (
         < BodyScrollView  style={styles.contentContainer} >
@@ -27,6 +48,37 @@ export default function NewListScreen() {
             </View>
             <View>
                 <Button>Create new list</Button>
+
+                <View style={styles.joinExistingContainer}>
+                    <View style={styles.line} />
+                        <ThemedText style={styles.joinExistingText} >or join existing</ThemedText>
+                    <View style={styles.line}/>
+
+                </View>
+            </View>
+            <View>
+                <TextInput 
+                    placeholder="Enter a list code"
+                    value={listId}
+                    onChangeText={setListId}
+                    onSubmitEditing={(e) => {
+                        joinShoppingListCallback(e.nativeEvent.text)
+                    }}
+                    containerStyle={styles.textInputStyle}
+                />
+
+                <Button
+                    onPress={handleJoinList}>
+                    disabled={!isValidListId}
+                        Join list
+                </Button>
+
+                <Button
+                    variant="ghost"
+                    // onPress={() => handleDismissTo("/list/new/scan")}
+                >
+                    Scan QR code
+                </Button>
 
                 <View style={styles.joinExistingContainer}>
                     <View style={styles.line} />
@@ -75,6 +127,9 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         alignItems: "center",
         gap: 16,
+    },
+    textInputStyle: {
+        marginBottom: 0,
     }
 
 })
