@@ -5,6 +5,7 @@ import { StyleSheet, Platform, View } from "react-native";
 import IconCircle from "@/components/IconCircle";
 import { backgroundColors, emojies } from "@/constants/Colors";
 import { useMemo } from "react";
+import Button from "@/components/ui/button";
 
 export default function NewListScreen() {
 
@@ -23,6 +24,16 @@ export default function NewListScreen() {
                     />
                 <ThemedText type="title" style={styles.title}> Better Together </ThemedText>
                 <ThemedText type="defaultSemiBold" style={styles.subtitle} > Create shared shopping lists and collaborate in real time with family and friends </ThemedText>
+            </View>
+            <View>
+                <Button>Create new list</Button>
+
+                <View style={styles.joinExistingContainer}>
+                    <View style={styles.line} />
+                        <ThemedText style={styles.joinExistingText} >or join existing</ThemedText>
+                    <View style={styles.line}/>
+
+                </View>
             </View>
         </BodyScrollView>
     
@@ -48,7 +59,20 @@ const styles = StyleSheet.create({
         alignItems: "center",
         gap: 16,
         marginTop: 32,
-    
+    },
+    buttonContainer: {
+        gap: 16,
+    },
+    line: {
+        flex: 1,
+        height: 1,
+        backgroundColor: "lightgray",
+    },
+    joinExistingText: {
+        color: "gray",
+    },
+    joinExistingContainer: {
+        flexDirection: "row",
     }
 
 })
