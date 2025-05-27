@@ -8,6 +8,7 @@ import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import { Stack, useRouter } from "expo-router";
 import { View, Text, Platform, StyleSheet, Pressable } from "react-native";
+import AntDesign from '@expo/vector-icons/AntDesign';
 
 export default function HomeScreen() {
 
@@ -17,7 +18,7 @@ export default function HomeScreen() {
     const renderHeaderRight = () => {
         return (
             <Pressable onPress ={() => router.push("/(index)/list/new")} >
-                <IconSymbol name="plus" size={32} color="white" />
+                <AntDesign name="pluscircleo" size={24} color="white" style={{padding:10}}/>
             </Pressable>
         )
     }
@@ -25,7 +26,7 @@ export default function HomeScreen() {
     const renderHeaderLeft = () => {
         return (
             <Pressable onPress={() => router.push("/profile")} >
-                <IconSymbol name="gear" size={32} color="white" />
+                <IconSymbol name="gear" size={28} color="white" />
             </Pressable>
         )
     }
