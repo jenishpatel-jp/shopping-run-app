@@ -73,6 +73,8 @@ const styles = StyleSheet.create({
     },
     joinExistingContainer: {
         flexDirection: "row",
+        alignItems: "center",
+        gap: 16,
     }
 
 })
