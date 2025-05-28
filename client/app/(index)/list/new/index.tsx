@@ -7,6 +7,7 @@ import { backgroundColors, emojies } from "@/constants/Colors";
 import { useMemo, useState } from "react";
 import Button from "@/components/ui/button";
 import TextInput from "@/components/ui/text-input";
+import { Href, useRouter } from "expo-router";
 
 const isValidUUID = (id: string | null) => {
     if (!id) return false;
@@ -17,19 +18,30 @@ const isValidUUID = (id: string | null) => {
 
 export default function NewListScreen() {
 
-    const randomEmoji = useMemo(() => emojies[Math.floor(Math.random() * emojies.length)], []);
-
-    const randomColour = useMemo(() => backgroundColors[Math.floor(Math.random() * backgroundColors.length)], []);
+    const router = useRouter();
 
     const [listId, setListId] = useState("");
     const isValidListId = useMemo(() => isValidUUID(listId), [listId]);
 
+    const randomEmoji = useMemo(() => emojies[Math.floor(Math.random() * emojies.length)], []);
+    const randomColour = useMemo(() => backgroundColors[Math.floor(Math.random() * backgroundColors.length)], []);
+
+    
     const joinShoppingListCallback = (listId:string) => {
 
     };
 
     const handleJoinList = () => {
 
+    };
+
+    const handleDismissTo = (screen: Href) => {
+        if(router.canDismiss()){
+            router.dismiss();
+            setTimeout(() => {
+                router.push(screen)
+            }, 100)
+        }
     };
 
 
@@ -75,7 +87,7 @@ export default function NewListScreen() {
 
                 <Button
                     variant="ghost"
-                    // onPress={() => handleDismissTo("/list/new/scan")}
+                    onPress={() => handleDismissTo("/list/new/scan")}
                 >
                     Scan QR code
                 </Button>
