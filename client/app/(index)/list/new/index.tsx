@@ -35,6 +35,7 @@ export default function NewListScreen() {
 
     };
 
+    //In the future, this can use the router.dismissTo() function
     const handleDismissTo = (screen: Href) => {
         if(router.canDismiss()){
             router.dismiss();
@@ -58,8 +59,8 @@ export default function NewListScreen() {
                 <ThemedText type="title" style={styles.title}> Better Together </ThemedText>
                 <ThemedText type="defaultSemiBold" style={styles.subtitle} > Create shared shopping lists and collaborate in real time with family and friends </ThemedText>
             </View>
-            <View>
-                <Button>Create new list</Button>
+            <View style={styles.contentContainer} >
+                <Button onPress={() => handleDismissTo("/list/new/create")} >Create new list</Button>
 
                 <View style={styles.joinExistingContainer}>
                     <View style={styles.line} />
@@ -80,8 +81,10 @@ export default function NewListScreen() {
                 />
 
                 <Button
-                    onPress={handleJoinList}>
+                    onPress={handleJoinList}
                     disabled={!isValidListId}
+                    >
+                    
                         Join list
                 </Button>
 
