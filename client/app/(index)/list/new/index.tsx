@@ -59,7 +59,7 @@ export default function NewListScreen() {
                 <ThemedText type="title" style={styles.title}> Better Together </ThemedText>
                 <ThemedText type="defaultSemiBold" style={styles.subtitle} > Create shared shopping lists and collaborate in real time with family and friends </ThemedText>
             </View>
-            <View style={styles.contentContainer} >
+            <View style={styles.viewContainer} >
                 <Button onPress={() => handleDismissTo("/list/new/create")} >Create new list</Button>
 
                 <View style={styles.joinExistingContainer}>
@@ -110,7 +110,11 @@ export default function NewListScreen() {
 const styles = StyleSheet.create({
     contentContainer: {                    
         padding: 16,
+        gap: 32,
         paddingTop: Platform.OS === "android" ? 60 : 16,
+    },
+    viewContainer: {
+        padding: 16,
     },
     title : {
         fontSize: 32,
