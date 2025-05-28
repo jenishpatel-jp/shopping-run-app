@@ -2,13 +2,14 @@ import { ThemedText } from "@/components/ThemedText";
 import { BodyScrollView } from "@/components/ui/BodyScrollView";
 import TextInput from "@/components/ui/text-input";
 import { appleBlue } from "@/constants/Colors";
-import { Stack } from "expo-router";
+import { Link, Stack } from "expo-router";
 import React, { useState } from "react";
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, View, Text } from "react-native";
 
 export default function CreateList() {
 
     const [listName, setListName] = useState("");
+    
 
     const handleCreateList = () => {
 
@@ -24,7 +25,7 @@ export default function CreateList() {
             }}
         />
             < BodyScrollView contentContainerStyle={styles.scrollViewContent}>
-                <View>
+                <View style={styles.inputContainer} >
                     <TextInput placeholder="Grocery Essentials"
                         size="lg" 
                         variant="ghost"
@@ -36,7 +37,15 @@ export default function CreateList() {
                         inputStyle={styles.titleInput}
                         containerStyle={styles.titleInputContainer}
                     />
-
+                <Link href={{
+                    pathname:"/",   
+                }}
+                style={[styles.emojiButton, { borderColor: "blue" }]}
+                >
+                    <View style={styles.emojiContainer} >
+                        <Text> {"😅"} </Text>
+                    </View>
+                </Link>
                 </View>
                 <ThemedText> Create List </ThemedText>
             </BodyScrollView>
