@@ -1,5 +1,6 @@
 import { ThemedText } from "@/components/ThemedText";
 import { BodyScrollView } from "@/components/ui/BodyScrollView";
+import Button from "@/components/ui/button";
 import TextInput from "@/components/ui/text-input";
 import { appleBlue } from "@/constants/Colors";
 import { Link, Stack } from "expo-router";
@@ -9,6 +10,7 @@ import { StyleSheet, View, Text } from "react-native";
 export default function CreateList() {
 
     const [listName, setListName] = useState("");
+    const [listDescription, setListDescription] = useState("")
     
 
     const handleCreateList = () => {
@@ -60,7 +62,25 @@ export default function CreateList() {
                 </Link>
 
                 </View>
-                <ThemedText> Create List </ThemedText>
+                <TextInput 
+                  placeholder="Description (optional)"
+                  value={listDescription}
+                  onChangeText={setListDescription}
+                  onSubmitEditing={handleCreateList}
+                  returnKeyType="done"
+                  variant="ghost"
+                  inputStyle={styles.descriptionInput}
+
+                />
+                <Button
+                  onPress={handleCreateList}
+                  disabled={!listName}
+                  variant="ghost"
+                  textStyle={styles.createButtonText}
+                
+                >
+                  Create List
+                </Button>
             </BodyScrollView>
         </>
     )

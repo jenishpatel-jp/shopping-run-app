@@ -18,7 +18,7 @@ export default function HomeScreen() {
     const renderHeaderRight = () => {
         return (
             <Pressable onPress ={() => router.push("/(index)/list/new")} >
-                <AntDesign name="pluscircleo" size={24} color="white" style={{}}/>
+                <AntDesign name="pluscircleo" size={24} color="white" style={{paddingRight: 10}}/>
             </Pressable>
         )
     }
