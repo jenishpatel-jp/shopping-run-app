@@ -40,7 +40,7 @@ export default function CreateList() {
                         containerStyle={styles.titleInputContainer}
                     />
                 <Link href={{
-                    pathname:"/",   
+                    pathname:"/emoji-picker",   
                 }}
                 style={[styles.emojiButton, { borderColor: "blue" }]}
                 >
