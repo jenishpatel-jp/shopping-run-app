@@ -46,6 +46,19 @@ export default function CreateList() {
                         <Text> {"😅"} </Text>
                     </View>
                 </Link>
+
+                <Link href={{
+                    pathname:"/",   
+                }}
+                style={[styles.emojiButton, { borderColor: "blue" }]}
+                >
+                    <View style={styles.colorContainer} >
+                        <View 
+                          style={styles.colorValue}
+                        />
+                    </View>
+                </Link>
+
                 </View>
                 <ThemedText> Create List </ThemedText>
             </BodyScrollView>
@@ -101,5 +114,12 @@ const styles = StyleSheet.create({
     height: 28,
     alignItems: "center",
     justifyContent: "center",
+  },
+  colorValue: {
+    width: 24, 
+    height: 24, 
+    borderRadius: 100,
+    backgroundColor: "blue",
+
   },
 });
