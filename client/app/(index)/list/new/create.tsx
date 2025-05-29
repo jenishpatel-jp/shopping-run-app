@@ -76,7 +76,7 @@ export default function CreateList() {
                   onPress={handleCreateList}
                   disabled={!listName}
                   variant="ghost"
-                  textStyle={styles.createButtonText}
+          
                 
                 >
                   Create List
