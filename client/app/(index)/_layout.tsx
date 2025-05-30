@@ -60,7 +60,21 @@ export default function HomeRoutesLayout() {
                 
                 />
 
+                <Stack.Screen 
+                    name="emoji-picker"
+                    options={{
+                        presentation: "formSheet",
+                        headerLargeTitle: false, 
+                        headerTitle: "Choose an emoji",
+                        sheetAllowedDetents: [0.5, 0.75, 1],
+                        sheetGrabberVisible: true,
+        
+                    }}
+
+                />
+
             </Stack>
+
         </ListCreationProvider>
     )
 }
