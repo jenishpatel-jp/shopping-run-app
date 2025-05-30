@@ -1,4 +1,3 @@
-import { ThemedText } from "@/components/ThemedText";
 import { BodyScrollView } from "@/components/ui/BodyScrollView";
 import Button from "@/components/ui/button";
 import TextInput from "@/components/ui/text-input";
@@ -50,7 +49,7 @@ export default function CreateList() {
                 </Link>
 
                 <Link href={{
-                    pathname:"/",   
+                  pathname: "/(index)/color-picker"
                 }}
                 style={[styles.emojiButton, { borderColor: "blue" }]}
                 >

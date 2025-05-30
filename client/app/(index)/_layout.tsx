@@ -70,7 +70,16 @@ export default function HomeRoutesLayout() {
                         sheetGrabberVisible: true,
         
                     }}
-
+                />
+                <Stack.Screen 
+                    name="color-picker"
+                    options={{
+                        presentation: "formSheet",
+                        headerLargeTitle: false, 
+                        headerTitle: "Choose a colour",
+                        sheetAllowedDetents: [0.5, 0.75, 1],
+                        sheetGrabberVisible: true,
+                    }}
                 />
 
             </Stack>
