@@ -1,10 +1,10 @@
 import { BodyScrollView } from "@/components/ui/BodyScrollView";
 import Button from "@/components/ui/button";
 import TextInput from "@/components/ui/text-input";
-import { appleBlue, backgroundColors } from "@/constants/Colors";
+import { appleBlue, backgroundColors, emojies } from "@/constants/Colors";
 import { useListCreation } from "@/context/ListCreationContext";
 import { Link, Stack } from "expo-router";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { StyleSheet, View, Text } from "react-native";
 
 export default function CreateList() {
@@ -12,12 +12,22 @@ export default function CreateList() {
     const [listName, setListName] = useState("");
     const [listDescription, setListDescription] = useState("");
 
-    const { selectedEmoji, selectedColor } = useListCreation();
+    const { selectedEmoji, selectedColor, setSelectedColor, setSelectedEmoji } = useListCreation();
     
 
     const handleCreateList = () => {
+    };
 
-    }
+    useEffect(() => {
+      setSelectedEmoji(emojies[Math.floor(Math.random() * emojies.length)])
+      setSelectedColor(backgroundColors[Math.floor(Math.random() * backgroundColors.length)])
+
+      //clean up function
+      return () => {
+        setSelectedColor("");
+        setSelectedEmoji("");
+      }
+    }, []);
 
     return (
 
