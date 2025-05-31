@@ -1,7 +1,8 @@
 import { BodyScrollView } from "@/components/ui/BodyScrollView";
 import Button from "@/components/ui/button";
 import TextInput from "@/components/ui/text-input";
-import { appleBlue } from "@/constants/Colors";
+import { appleBlue, backgroundColors } from "@/constants/Colors";
+import { useListCreation } from "@/context/ListCreationContext";
 import { Link, Stack } from "expo-router";
 import React, { useState } from "react";
 import { StyleSheet, View, Text } from "react-native";
@@ -9,7 +10,9 @@ import { StyleSheet, View, Text } from "react-native";
 export default function CreateList() {
 
     const [listName, setListName] = useState("");
-    const [listDescription, setListDescription] = useState("")
+    const [listDescription, setListDescription] = useState("");
+
+    const { selectedEmoji, selectedColor } = useListCreation();
     
 
     const handleCreateList = () => {
@@ -41,21 +44,21 @@ export default function CreateList() {
                 <Link href={{
                     pathname:"/emoji-picker",   
                 }}
-                style={[styles.emojiButton, { borderColor: "blue" }]}
+                style={[styles.emojiButton, { borderColor: selectedColor}]}
                 >
                     <View style={styles.emojiContainer} >
-                        <Text> {"😅"} </Text>
+                        <Text> { selectedEmoji } </Text>
                     </View>
                 </Link>
 
                 <Link href={{
                   pathname: "/(index)/color-picker"
                 }}
-                style={[styles.emojiButton, { borderColor: "blue" }]}
+                style={[styles.emojiButton, { borderColor: selectedColor }]}
                 >
                     <View style={styles.colorContainer} >
                         <View 
-                          style={styles.colorValue}
+                          style={[styles.colorValue, {backgroundColor: selectedColor}]}
                         />
                     </View>
                 </Link>
@@ -138,7 +141,6 @@ const styles = StyleSheet.create({
     width: 24, 
     height: 24, 
     borderRadius: 100,
-    backgroundColor: "blue",
 
   },
 });
