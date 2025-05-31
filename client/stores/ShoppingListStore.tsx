@@ -1,3 +1,16 @@
+import { useCallback } from "react";
+import { randomUUID } from "expo-crypto";
+import { debounce } from 'lodash'
+import { useRemoteRowId } from "tinybase/ui-react";
+import * as UiReact from "tinybase/ui-react/with-schemas";
+import {
+  Cell,
+  createMergeableStore,
+  createRelationships,
+  Value,
+} from "tinybase/with-schemas";
+
+
 const STORE_ID_PREFIX = "shoppingListStore-";
 
 const VALUES_SCHEMA = {
@@ -27,3 +40,24 @@ const TABLES_SCHEMA = {
     nickname: { type: "string" },
   },
 } as const;
+
+type Schemas = [typeof TABLES_SCHEMA, typeof VALUES_SCHEMA];
+type ShoppingListValueId = keyof typeof VALUES_SCHEMA;
+type ShoppingListProductCellId = keyof (typeof TABLES_SCHEMA)["products"];
+
+const {
+  useCell,
+  useCreateMergeableStore,
+  useDelRowCallback,
+  useProvideRelationships,
+  useProvideStore,
+  useRowCount,
+  useSetCellCallback,
+  useSetValueCallback,
+  useSortedRowIds,
+  useStore,
+  useCreateRelationships,
+  useTable,
+  useValue,
+  useValuesListener,
+} = UiReact as UiReact.WithSchemas<Schemas>;
