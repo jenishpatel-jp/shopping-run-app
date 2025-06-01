@@ -9,6 +9,9 @@ import {
   createRelationships,
   Value,
 } from "tinybase/with-schemas";
+import { useCreateClientPersisterAndStart } from "./persistence/useCreateClientPersisterAndStart";
+import { useCreateServerSynchronizerAndStart } from "./synchronization/useCreateServerSynchronizationAndStart";
+import { useUserIdAndNickname } from "@/hooks/useNickname";
 
 
 const STORE_ID_PREFIX = "shoppingListStore-";
@@ -72,5 +75,20 @@ export default function ShoppingListStore({
     listId: string;
     initialContentJson: string;
  }) {
+    const storeId = useStoreId(listId);
+    const store = useCreateMergeableStore(() => createMergeableStore().setSchema(TABLES_SCHEMA, VALUES_SCHEMA));
+
+    const [userId, nickname] = useUserIdAndNickname();
+    // Persist store (with intial content if it hasn't been saved before), then
+    // ensure the current user is added as a colloborater.
+
+    useCreateClientPersisterAndStart(storeId, store, initialContentJson, () =>
+        store.setRow("collaborators", userId, { nickname })
+    );
+    useCreateServerSynchronizerAndStart(storeId, store);
+    useProvideStore(storeId, store);
+
+    return null;
+    
     //todo
  }
