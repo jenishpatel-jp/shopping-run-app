@@ -61,3 +61,16 @@ const {
   useValue,
   useValuesListener,
 } = UiReact as UiReact.WithSchemas<Schemas>;
+
+const useStoreId = (listId: string) => STORE_ID_PREFIX + listId;
+
+// Create, persist, and sync a store containing the shopping list and products 
+export default function ShoppingListStore({
+    listId,
+    initialContentJson,
+ }: {
+    listId: string;
+    initialContentJson: string;
+ }) {
+    //todo
+ }
